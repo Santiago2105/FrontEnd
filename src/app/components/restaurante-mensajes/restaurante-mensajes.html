@@ -1,0 +1,47 @@
+<div class="module-container">
+
+  <div class="header-row">
+    <div>
+      <h2>Mensajes de tus anuncios</h2>
+      <p class="subtitle">
+        Revisa los mensajes enviados por usuarios interesados en tus anuncios.
+      </p>
+    </div>
+
+    <button class="btn-secondary" type="button" (click)="recargar()">
+      Recargar
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="info-msg">Cargando mensajes...</div>
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+
+  <div *ngIf="!loading && !error">
+
+    <div *ngIf="mensajeInfo && mensajes.length === 0" class="empty-state">
+      <p>{{ mensajeInfo }}</p>
+    </div>
+
+    <table *ngIf="mensajes.length > 0" class="module-table">
+      <thead>
+      <tr>
+        <th>Mensaje</th>
+        <th>Fecha de envío</th>
+        <th>ID Anuncio</th>
+        <th>ID Usuario</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let m of mensajes">
+        <td class="col-texto">
+          {{ m.texto }}
+        </td>
+        <td>{{ m.fechaEnvio | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ m.anuncioId }}</td>
+        <td>{{ m.usuarioId }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
